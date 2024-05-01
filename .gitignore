@@ -1,0 +1,7 @@
+Debug/*
+build/*
+MathsLibrary/build/*
+MathsLibrary/Debug/*
+.vs/*
+MathsLibrary.sln
+*.vcxproj*
