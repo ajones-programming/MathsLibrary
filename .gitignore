@@ -5,3 +5,4 @@ MathsLibrary/Debug/*
 .vs/*
 MathsLibrary.sln
 *.vcxproj*
+x64/*
