@@ -6,6 +6,7 @@
 #define MATHSLIBRARY_API __declspec(dllimport)
 #endif
 
+#include <limits>
 //extern "C" MATHSLIBRARY_API void PRINT_SOMETHING();
 
 extern "C" MATHSLIBRARY_API class MathsLibrary {
