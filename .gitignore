@@ -6,4 +6,14 @@ MathsLibrary/Debug/*
 MathsLibrary.sln
 *.vcxproj*
 x64/*
+x64/Debug/*
+x64/Release/*
 *.tlog
+*.obj
+*.log
+*.idb
+*.pdb
+*.ilk
+*.exe*
+*.iobj
+*.ipdb
