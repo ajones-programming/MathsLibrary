@@ -19,8 +19,6 @@ void Tests::DegToRad()
 	auto homemade = [input]() { return MathsLibrary::Deg2Rad(input); };
 	auto standard = [input]() { return input * (M_PI / 180.f); };
 	runBoth(homemade, standard);
-
-	
 }
 
 ////	Infinity	A representation of positive infinity(Read Only).

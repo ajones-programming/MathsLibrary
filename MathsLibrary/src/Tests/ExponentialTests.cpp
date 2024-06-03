@@ -3,13 +3,11 @@
 #include<iostream>
 #include <math.h>
 
-
 void Tests::Exp()
 {
 	std::cout << "Exponential. Comparing homemade function to existing function" << std::endl;
 	std::cout << "Input Value to Convert: ";
 	float input;
-
 	std::cin >> input;
 
 	auto homemade = [input]() { return MathsLibrary::Exp(input); };

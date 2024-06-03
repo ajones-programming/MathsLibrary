@@ -4,7 +4,6 @@
 #include <map>
 #include <string>
 
-
 template <typename T>
 T listAndGetValues(std::map<T, std::string> list, std::string testName = "");
 

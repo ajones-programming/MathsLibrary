@@ -67,7 +67,6 @@ void Tests::CielToInt()
 //static float Clamp(float, float, float);
 void Tests::Clamp()
 {
-	
 	std::cout << "Clamp Value. Comparing homemade function to existing function" << std::endl;
 	std::cout << "Input Value to Convert: ";
 	float input;
@@ -138,7 +137,6 @@ void Tests::Max()
 		std::cout << "Input a number (" << (Count + 1) << ")" << std::endl;
 		std::cin >> arrayOfNumbers[Count];
 	}
-
 	float output = numberInArray == 2 ? MathsLibrary::Max(arrayOfNumbers[0], arrayOfNumbers[1]) : MathsLibrary::Max(arrayOfNumbers, (int)numberInArray);
 	std::cout << "Output from function: " << output << std::endl;
 	delete[] arrayOfNumbers;
