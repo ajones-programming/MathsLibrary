@@ -6,3 +6,4 @@ MathsLibrary/Debug/*
 MathsLibrary.sln
 *.vcxproj*
 x64/*
+*.tlog
