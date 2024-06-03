@@ -12,27 +12,32 @@ public:
 private:
 
 	void ShowIntroduction();
-	bool MainOptions();
+
 	void TypeCategory();
 
 	template <typename lambdaFunc1, typename lambdaFunc2>
-	void runBoth(lambdaFunc1 homemade, lambdaFunc2 standard)
+	void runBoth(const lambdaFunc1& homemade, const lambdaFunc2& standard)
 	{
 		std::cout << "Runtime:" << std::endl;
-		std::cout << "\tHomemade" << std::endl;
-		auto start = std::chrono::high_resolution_clock::now();
-		auto resulthomemade = homemade();
-		auto stop = std::chrono::high_resolution_clock::now();
-		std::cout << "\t\tResult: " << resulthomemade << std::endl;
-		std::cout << "\t\tTime: " << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << std::endl;
+		
+		
 		std::cout << "\tStandard" << std::endl;
-		start = std::chrono::high_resolution_clock::now();
+		auto start = std::chrono::high_resolution_clock::now();
 		auto resultstandard = standard();
-		stop = std::chrono::high_resolution_clock::now();
+		auto stop = std::chrono::high_resolution_clock::now();
 		std::cout << "\t\tResult: " << resultstandard << std::endl;
+		std::cout << "\t\tTime: " << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << std::endl;
+
+		std::cout << "\tHomemade" << std::endl;
+		start = std::chrono::high_resolution_clock::now();
+		auto resulthomemade = homemade();
+		stop = std::chrono::high_resolution_clock::now();
+		std::cout << "\t\tResult: " << resulthomemade << std::endl;
 		std::cout << "\t\tTime: " << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << std::endl;
 	}
 
+	//MAIN TESTS
+	bool MainOptions();
 	enum class MAIN_TEST_TYPES {
 		STATIC,
 		BASIC,
@@ -44,7 +49,6 @@ private:
 		LERPING,
 		RANDOMNESS
 	} ;
-
 	std::map<MAIN_TEST_TYPES, std::string> allMainOptionsText = std::map<MAIN_TEST_TYPES, std::string>{
 		
 		{MAIN_TEST_TYPES::STATIC,"STATIC TESTS"},
@@ -59,6 +63,7 @@ private:
 	};
 
 	//STATIC
+	void StaticTests();
 	enum class STATIC_TESTS {
 		DEG_2_RAD,
 		INFINITY__DEFINED,
@@ -66,7 +71,6 @@ private:
 		PI__DEFINED,
 		RAD_2_DEGREE
 	} ;
-
 	std::map<STATIC_TESTS, std::string> allStaticOptionsText = std::map<STATIC_TESTS, std::string>{
 		{STATIC_TESTS::DEG_2_RAD , "Degrees to Radians"},
 		{STATIC_TESTS::INFINITY__DEFINED,"Infinity"},
@@ -80,9 +84,10 @@ private:
 	void PI();
 	void Rad2Deg();
 
-	void StaticTests();
+
 
 	//BASIC
+	void BasicTests();
 	enum class BASIC_TESTS  {
 		ABS,
 		APPROX,
@@ -100,9 +105,9 @@ private:
 		SIGN,
 		SQRT
 	} ;
-
 	std::map<BASIC_TESTS, std::string> allBasicOptionsText = std::map<BASIC_TESTS, std::string>
 	{
+		
 		{BASIC_TESTS::ABS, "Abs"},
 		{BASIC_TESTS::APPROX, "Approx"},
 		{BASIC_TESTS::CIEL,"Ciel"},
@@ -119,7 +124,6 @@ private:
 		{BASIC_TESTS::SIGN,"Sign"},
 		{BASIC_TESTS::SQRT,"Square Root"}
 	};
-
 	void Abs();
 	void Approx();
 	void Ciel();
@@ -136,9 +140,9 @@ private:
 	void Sign();
 	void Sqrt();
 
-	void BasicTests();
 
 	//TRIG:
+	void TrigTests();
 	enum class TRIG_TESTS {
 		ACOS,
 		ASIN,
@@ -149,7 +153,6 @@ private:
 		SIN,
 		TAN
 	};
-
 	std::map<TRIG_TESTS, std::string> allTrigOptionsText = std::map<TRIG_TESTS, std::string>{
 		{TRIG_TESTS::ACOS, "ACos"},
 		{TRIG_TESTS::ASIN,"Asin"},
@@ -160,7 +163,6 @@ private:
 		{TRIG_TESTS::SIN,"Sine"},
 		{TRIG_TESTS::TAN,"Tan"}
 	};
-
 	void Acos();
 	void Asin();
 	void Atan();
@@ -170,81 +172,77 @@ private:
 	void Sin();
 	void Tan();
 
-	void TrigTests();
+
 
 	//POWERS
-
+	void PowersTests();
 	enum class POWERS_TESTS{
 		CLOSEST_POWER_OF_TWO,
 		IS_POWER_OF_TWO,
 		NEXT_POWER_OF_TWO
 	} ;
-
 	std::map<POWERS_TESTS, std::string> allPowersOptionsText = std::map<POWERS_TESTS, std::string>{
 		{POWERS_TESTS::CLOSEST_POWER_OF_TWO,"Closest Power of Two"},
 		{POWERS_TESTS::IS_POWER_OF_TWO, "Is Power of Two"},
 		{POWERS_TESTS::NEXT_POWER_OF_TWO, "Next Power of Two"}
 	};
-
 	void ClosestPowerOfTwo();
 	void IsPowerOfTwo();
 	void NextPowerOfTwo();
 
-	void PowersTests();
+	
 
 	//EXPONENTIALS
+	void ExponentialsTests();
 	enum class EXPONENTIALS_TESTS  {
 		EXP,
 		LOG,
 		LOG10
 	} ;
-
 	std::map<EXPONENTIALS_TESTS, std::string> allExponentialsOptionsText = std::map<EXPONENTIALS_TESTS, std::string>{
 		{EXPONENTIALS_TESTS::EXP,"Exponential"},
 		{EXPONENTIALS_TESTS::LOG, "Ln"},
 		{EXPONENTIALS_TESTS::LOG10, "Log 10"}
 	};
-
 	void Exp();
 	void Log();
 	void Log10();
 
-	void ExponentialsTests();
+	
 
 	//COLOUR
+	void ColourTests();
 	enum class COLOUR_TESTS {
 		GAMMA_TO_LINEAR,
 		LINEAR_TO_GAMMA
 	} ;
-
 	std::map<COLOUR_TESTS, std::string> allColourOptionsText = std::map<COLOUR_TESTS, std::string>{
 		{COLOUR_TESTS::GAMMA_TO_LINEAR,"Gamma To Linear"},
 		{COLOUR_TESTS::LINEAR_TO_GAMMA,"Linear to Gamma"}
 	};
-
 	void GammaToLinear();
 	void LinearToGamma();
 
-	void ColourTests();
+	
 
 	//ENCODING
+	void EncodingTests();
 	enum class ENCODING_TESTS {
 		FLOAT_TO_HALF,
 		HALF_TO_FLOAT
 	} ;
-
 	std::map<ENCODING_TESTS, std::string> allEncodingOptionsText = std::map<ENCODING_TESTS, std::string>{
 		{ENCODING_TESTS::FLOAT_TO_HALF, "Float to Half"},
 		{ENCODING_TESTS::HALF_TO_FLOAT, "Half to Float"}
 
 	};
-
 	void FloatToHalf();
 	void HalfToFloat();
 
-	void EncodingTests();
+	
 
 	//LERPING
+	void LerpingTests();
 	enum class LERPING_TESTS {
 		INVERSE_LERP,
 		LERP,
@@ -256,7 +254,6 @@ private:
 		SMOOTH_DAMP_ANGLE,
 		SMOOTH_STEP
 	};
-
 	std::map<LERPING_TESTS, std::string> allLerpingOptionsText = std::map<LERPING_TESTS, std::string>{
 		{LERPING_TESTS::INVERSE_LERP, "Inverse Lerp"},
 		{LERPING_TESTS::LERP, "Lerp"},
@@ -268,7 +265,6 @@ private:
 		{LERPING_TESTS::SMOOTH_DAMP_ANGLE, "Smooth Damp Angle"},
 		{LERPING_TESTS::SMOOTH_STEP, "Smooth Step"}
 	};
-
 	void InverseLerp();
 	void Lerp();
 	void LerpAngle();
@@ -279,9 +275,8 @@ private:
 	void SmoothDampAngle();
 	void SmoothStep();
 
-	void LerpingTests();
-
 	//RANDOMNESS
+	void RandomnessTests();
 	enum class RANDOMNESS_TESTS {
 		PERLIN_NOISE,
 		PING_PONG,
@@ -292,10 +287,9 @@ private:
 		{RANDOMNESS_TESTS::PING_PONG, "Ping Pong"},
 		{RANDOMNESS_TESTS::REPEAT,"Repeat"}
 	};
-
 	void PerlinNoise();
 	void PingPong();
 	void Repeat();
 
-	void RandomnessTests();
+	
 };

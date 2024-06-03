@@ -7,7 +7,6 @@
 #endif
 
 #include <limits>
-//extern "C" MATHSLIBRARY_API void PRINT_SOMETHING();
 
 extern "C" MATHSLIBRARY_API class MathsLibrary {
 public:
@@ -29,14 +28,15 @@ public:
 
 	//BASIC:
 	//	Abs	Returns the absolute value of f.
-	MATHSLIBRARY_API static float Abs(const float value);
+	MATHSLIBRARY_API static float Abs (const float value);
 	//	Approximately	Compares two floating point values and returns true if they are similar.
 	MATHSLIBRARY_API static bool Approx(const float input, const float toCompareTo);
 	//	Ceil	Returns the smallest integer greater to or equal to f.
-	MATHSLIBRARY_API static float Ciel(const float value);
+	MATHSLIBRARY_API static float Ceil(const float value);
 	//	CeilToInt	Returns the smallest integer greater to or equal to f.
-	MATHSLIBRARY_API static int CielToInt(const float value);
-	//	Clamp	Clamps the given value between the given minimum float and maximum float values.Returns the given value if it is within the minimumand maximum range.
+	MATHSLIBRARY_API static int CeilToInt(const float value);
+	//	Clamp	Clamps the given value between the given minimum float and maximum float values.
+	//  Returns the given value if it is within the minimumand maximum range.
 	MATHSLIBRARY_API static float Clamp(const float value, const float minimum, const float maximum);
 	//	Clamp01	Clamps value between 0 and 1 and returns value.
 	MATHSLIBRARY_API static float Clamp01(const float value);
@@ -51,6 +51,8 @@ public:
 	MATHSLIBRARY_API static float Min(const float value1, const float value2);
 	MATHSLIBRARY_API static float Min(const float[], const int numberInArray);
 	//	Pow	Returns f raised to power p.
+	MATHSLIBRARY_API static int Pow(const int value, const int toPowerOf);
+	MATHSLIBRARY_API static float Pow(const float value, const int toPowerOf);
 	MATHSLIBRARY_API static float Pow(const float value, const float toPowerOf);
 	//	Round	Returns f rounded to the nearest integer.
 	MATHSLIBRARY_API static float Round(const float value);
@@ -147,7 +149,7 @@ private:
 	static float PowerInt(float, int);
 	static float DecimalPower(float, float);
 	static float ExpCore(float);
-#define ACCURACY 5
+	static constexpr int ACCURACY{ 5 };
 	static float totalTaylorSeries__DivisionPrecalculated(float value, float taylor_values[ACCURACY]);
 	static float totalTaylorSeries__DivisionPrecalculated(float value, float* taylor_values, int size);
 

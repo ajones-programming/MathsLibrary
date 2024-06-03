@@ -2,7 +2,7 @@
 #include <iostream>
 
 #define ACCURACY 5
-#define e 2.71828182845f
+constexpr float e = 2.71828182845f;
 
 float MathsLibrary::Exp(float value) {
 //if value is not between 0 and 1

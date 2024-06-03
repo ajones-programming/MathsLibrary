@@ -44,7 +44,7 @@ void Tests::Ciel()
 	float input;
 	std::cin >> input;
 
-	auto homemade = [input]() { return MathsLibrary::Ciel(input); };
+	auto homemade = [input]() { return MathsLibrary::Ceil(input); };
 	auto standard = [input]() { return std::ceil(input); };
 	runBoth(homemade, standard);
 }
@@ -58,7 +58,7 @@ void Tests::CielToInt()
 	float input;
 	std::cin >> input;
 
-	auto homemade = [input]() { return MathsLibrary::CielToInt(input); };
+	auto homemade = [input]() { return MathsLibrary::CeilToInt(input); };
 	auto standard = [input]() { return (int)std::ceil(input); };
 	runBoth(homemade, standard);
 }

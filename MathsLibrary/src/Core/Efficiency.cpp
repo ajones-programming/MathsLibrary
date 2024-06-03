@@ -30,10 +30,11 @@ float MathsLibrary::DecimalPower(float value, float decimalPower) {
 }
 
 //ASSUMING VALUE IS BETWEEN 0 AND 1
-#define ACCURACY 6
-#define e 2.71828182845f
+constexpr int ACCURACY{ 6 };
+constexpr float e{ 2.71828182845f };
 float MathsLibrary::ExpCore(float value)
 {
+	//simd?
 	float total = 0.f;
 	int totalDivider = 1;
 	float iteratorMultiply = 1.f;
@@ -46,7 +47,7 @@ float MathsLibrary::ExpCore(float value)
 		iteratorMultiply *= valueToMultiplyBy;
 		total += thisTotal;
 	}
-	return value > 0.55 ? total * e :  total;
+	return value > 0.55 ? total * e : total;
 }
 
 float MathsLibrary::totalTaylorSeries__DivisionPrecalculated(float value, float taylor_values[ACCURACY])

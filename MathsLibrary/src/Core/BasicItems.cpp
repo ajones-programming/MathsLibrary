@@ -1,30 +1,32 @@
 #include "MathsLibrary.h"
 #include <iostream>
 
+constexpr float  APPROX_VALUE = 0.0001f;
+
 float MathsLibrary::Abs(const float value)
 {
 	return value > 0.f ? value : -value;
 }
 
-#define APPROX_VALUE 0.0001f
+
 
 bool MathsLibrary::Approx(const float value, const float toCompareTo)
 {
 	return Abs(value - toCompareTo) < APPROX_VALUE;
 }
 
-float MathsLibrary::Ciel(const float value)
+float MathsLibrary::Ceil(const float value)
 {
+	float flooredValue = ((int)value);
 	if (value < 0.f) {
-		return (float)((int)value);
+		return flooredValue;
 	}
-	float flooredValue = (float)((int)value);
 	return flooredValue + (value - flooredValue > APPROX_VALUE ? 1.f : 0.f);
 }
 
-int MathsLibrary::CielToInt(const float value)
+int MathsLibrary::CeilToInt(const float value)
 {
-	return (int)Ciel(value);
+	return Ceil(value);
 }
 
 float MathsLibrary::Clamp(const float value, const float minimum, const float maximum)
@@ -38,6 +40,7 @@ float MathsLibrary::Clamp(const float value, const float minimum, const float ma
 	return value;
 }
 
+//change to saturate??
 float MathsLibrary::Clamp01(const float value)
 {
 	return Clamp(value,0.f,1.f);
@@ -46,9 +49,9 @@ float MathsLibrary::Clamp01(const float value)
 float MathsLibrary::Floor(const float value)
 {
 	if (value >= 0.f) {
-		return (float)((int)value);
+		return ((int)value);
 	}
-	float flooredValue = (float)((int)value);
+	float flooredValue = ((int)value);
 	return flooredValue - (value - flooredValue < APPROX_VALUE ? 1.f : 0.f);
 }
 
@@ -101,9 +104,9 @@ float MathsLibrary::Pow(const float value, const float power)
 		return 0.f;
 	}
 	if (Approx(value, 1.f)) {
-		return 1.f;
+		return value;
 	}
-	if (value < 0.f && !Approx(power, (int)power)) {
+	if (value < 0.f) {
 		//ERROR!
 		return 0.f;
 	}
@@ -117,6 +120,15 @@ float MathsLibrary::Pow(const float value, const float power)
 
 }
 
+float MathsLibrary::Pow(const float value, const int toPowerOf)
+{
+	return PowerInt(value, toPowerOf);
+}
+
+int MathsLibrary::Pow(const int value, const int toPowerOf)
+{
+	return PowerInt(value, toPowerOf);
+}
 
 
 float MathsLibrary::Round(const float value)
@@ -158,9 +170,25 @@ float MathsLibrary::Sign(const float value)
 	return 0.0f;
 }
 
-float MathsLibrary::Sqrt(const float value)
+
+//QUAKE 3 FUN!! MAGIC NUMBER????
+# include <bit>
+# include <limits>
+# include <cstdint>
+
+constexpr float Q_rsqrt(float number) noexcept
 {
-	return Pow(value,0.5f);
+	static_assert(std::numeric_limits<float>::is_iec559); // (enable only on IEEE 754)
+
+	float const y = std::bit_cast<float>(
+		0x5f3759df - (std::bit_cast<std::uint32_t>(number) >> 1));
+	return y * (1.5f - (number * 0.5f * y * y));
 }
 
-
+//QUAKE 3 FAST INVERSE SQUARE ROOT
+//IMPLEMENTATION CREDIT TO https://en.wikipedia.org/wiki/Fast_inverse_square_root
+float MathsLibrary::Sqrt(const float value)
+{
+	return 1.f / Q_rsqrt(value);
+	//return Pow(value,0.5f);
+}
