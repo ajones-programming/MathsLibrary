@@ -1,7 +1,9 @@
 #pragma once
 #include <map>
 #include <string>
+#include <concepts>
 #include <chrono>
+#include <iostream>
 
 class Tests
 {
@@ -13,12 +15,23 @@ private:
 	bool MainOptions();
 	void TypeCategory();
 
-	void StartTimer();
-	void StopTimer();
-	int nanosecondsDifference();
-
-	std::chrono::steady_clock::time_point _start;
-	std::chrono::steady_clock::time_point _stop;
+	template <typename lambdaFunc1, typename lambdaFunc2>
+	void runBoth(lambdaFunc1 homemade, lambdaFunc2 standard)
+	{
+		std::cout << "Runtime:" << std::endl;
+		std::cout << "\tHomemade" << std::endl;
+		auto start = std::chrono::high_resolution_clock::now();
+		auto resulthomemade = homemade();
+		auto stop = std::chrono::high_resolution_clock::now();
+		std::cout << "\t\tResult: " << resulthomemade << std::endl;
+		std::cout << "\t\tTime: " << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << std::endl;
+		std::cout << "\tStandard" << std::endl;
+		start = std::chrono::high_resolution_clock::now();
+		auto resultstandard = standard();
+		stop = std::chrono::high_resolution_clock::now();
+		std::cout << "\t\tResult: " << resultstandard << std::endl;
+		std::cout << "\t\tTime: " << std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count() << std::endl;
+	}
 
 	enum class MAIN_TEST_TYPES {
 		STATIC,

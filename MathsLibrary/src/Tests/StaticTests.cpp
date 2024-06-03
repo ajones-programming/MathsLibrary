@@ -15,9 +15,11 @@ void Tests::DegToRad()
 	std::cout << "Input Degrees to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = input * (M_PI / 180.f);
-	std::cout << "Output from function: " << MathsLibrary::Deg2Rad(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Deg2Rad(input); };
+	auto standard = [input]() { return input * (M_PI / 180.f); };
+	runBoth(homemade, standard);
+
 	
 }
 
@@ -53,7 +55,8 @@ void Tests::Rad2Deg()
 	std::cout << "Input Radians to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = input * (180.f/ M_PI);
-	std::cout << "Output from function: " << MathsLibrary::Rad2Deg(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Rad2Deg(input); };
+	auto standard = [input]() { return input * (180.f / M_PI); };
+	runBoth(homemade, standard);
 }

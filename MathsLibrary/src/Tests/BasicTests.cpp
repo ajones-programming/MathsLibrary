@@ -1,8 +1,8 @@
 #include "MathsLibrary.h"
 #include "Tests.h"
 #include <iostream>
-#include <chrono>
 #include <math.h>
+#include <algorithm>
 
 ////	Abs	Returns the absolute value of f.
 //static float Abs(float);
@@ -12,9 +12,10 @@ void Tests::Abs()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::abs(input);
-	std::cout << "Output from function: " << MathsLibrary::Abs(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Abs(input); };
+	auto standard = [input]() { return std::abs(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Approximately	Compares two floating point values and returns true if they are similar.
@@ -29,10 +30,9 @@ void Tests::Approx()
 	float toCompare;
 	std::cin >> toCompare;
 
-	bool isApproxEqual = MathsLibrary::Approx(input, toCompare);
-	float differenceBetween = std::abs(input - toCompare);
-	std::cout << "Is approx equal: " << std::to_string( isApproxEqual) << std::endl;
-	std::cout << "Difference between values: " << differenceBetween << std::endl;
+	auto homemade = [input, toCompare]() { return MathsLibrary::Approx(input, toCompare); };
+	auto standard = [input, toCompare]() { return std::abs(input - toCompare); };
+	runBoth(homemade, standard);
 }
 
 ////	Ceil	Returns the smallest integer greater to or equal to f.
@@ -43,9 +43,10 @@ void Tests::Ciel()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::ceil(input);
-	std::cout << "Output from function: " << MathsLibrary::Ciel(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Ciel(input); };
+	auto standard = [input]() { return std::ceil(input); };
+	runBoth(homemade, standard);
 }
 
 ////	CeilToInt	Returns the smallest integer greater to or equal to f.
@@ -56,15 +57,17 @@ void Tests::CielToInt()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::ceil(input);
-	std::cout << "Output from function: " << MathsLibrary::CielToInt(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::CielToInt(input); };
+	auto standard = [input]() { return (int)std::ceil(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Clamp	Clamps the given value between the given minimum float and maximum float values.Returns the given value if it is within the minimumand maximum range.
 //static float Clamp(float, float, float);
 void Tests::Clamp()
 {
+	
 	std::cout << "Clamp Value. Comparing homemade function to existing function" << std::endl;
 	std::cout << "Input Value to Convert: ";
 	float input;
@@ -76,7 +79,9 @@ void Tests::Clamp()
 	float maximum;
 	std::cin >> maximum;
 
-	std::cout << "Output from function: " << MathsLibrary::Clamp(input,minimum,maximum) << std::endl;
+	auto homemade = [input, minimum, maximum]() { return MathsLibrary::Clamp(input, minimum, maximum); };
+	auto standard = [input, minimum, maximum]() { return std::clamp(input, minimum, maximum); };
+	runBoth(homemade, standard);
 }
 
 ////	Clamp01	Clamps value between 0 and 1 and returns value.
@@ -87,7 +92,9 @@ void Tests::Clamp01()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	std::cout << "Output from function: " << MathsLibrary::Clamp01(input) << std::endl;
+	auto homemade = [input]() { return MathsLibrary::Clamp01(input); };
+	auto standard = [input]() { return std::clamp(input,0.f,1.f); };
+	runBoth(homemade, standard);
 }
 
 ////	Floor	Returns the largest integer smaller than or equal to f.
@@ -98,9 +105,9 @@ void Tests::Floor()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::floor(input);
-	std::cout << "Output from function: " << MathsLibrary::Floor(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+	auto homemade = [input]() { return MathsLibrary::Floor(input); };
+	auto standard = [input]() { return std::floor(input); };
+	runBoth(homemade, standard);
 }
 
 ////	FloorToInt	Returns the largest integer smaller to or equal to f.
@@ -111,9 +118,10 @@ void Tests::FloorToInt()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::floor(input);
-	std::cout << "Output from function: " << MathsLibrary::FloorToInt(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::FloorToInt(input); };
+	auto standard = [input]() { return std::floor(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Max	Returns largest of two or more values.
@@ -130,6 +138,7 @@ void Tests::Max()
 		std::cout << "Input a number (" << (Count + 1) << ")" << std::endl;
 		std::cin >> arrayOfNumbers[Count];
 	}
+
 	float output = numberInArray == 2 ? MathsLibrary::Max(arrayOfNumbers[0], arrayOfNumbers[1]) : MathsLibrary::Max(arrayOfNumbers, (int)numberInArray);
 	std::cout << "Output from function: " << output << std::endl;
 	delete[] arrayOfNumbers;
@@ -166,10 +175,9 @@ void Tests::Pow()
 	float toThePowerOf;
 	std::cin >> toThePowerOf;
 
-	float homemade = MathsLibrary::Pow(input, toThePowerOf);
-	float mathsLibraryVer = std::pow(input, toThePowerOf);
-	std::cout << "Homemade version: " << homemade << std::endl;
-	std::cout << "Math.h version: " << mathsLibraryVer << std::endl;
+	auto homemade = [input, toThePowerOf]() { return MathsLibrary::Pow(input, toThePowerOf); };
+	auto standard = [input, toThePowerOf]() { return std::pow(input, toThePowerOf); };
+	runBoth( homemade, standard);
 }
 
 ////	Round	Returns f rounded to the nearest integer.
@@ -180,9 +188,10 @@ void Tests::Round()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::round(input);
-	std::cout << "Output from function: " << MathsLibrary::Round(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Round(input); };
+	auto standard = [input]() { return std::round(input); };
+	runBoth(homemade, standard);
 }
 
 ////	RoundToInt	Returns f rounded to the nearest integer.
@@ -193,9 +202,9 @@ void Tests::RoundToInt()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::round(input);
-	std::cout << "Output from function: " << MathsLibrary::RoundToInt(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+	auto homemade = [input]() { return MathsLibrary::RoundToInt(input); };
+	auto standard = [input]() { return std::round(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Sign	Returns the sign of f.
@@ -206,9 +215,10 @@ void Tests::Sign()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = input > 0.f ? 1.f : (input == 0.f ? 0.f : -1.f);
-	std::cout << "Output from function: " << MathsLibrary::Sign(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Sign(input); };
+	auto standard = [input]() { return input > 0.f ? 1.f : (input == 0.f ? 0.f : -1.f); };
+	runBoth(homemade, standard);
 }
 
 ////	Sqrt	Returns square root of f.
@@ -219,7 +229,8 @@ void Tests::Sqrt()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::sqrt(input);
-	std::cout << "Output from function: " << MathsLibrary::Sqrt(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Sqrt(input); };
+	auto standard = [input]() { return std::sqrt(input); };
+	runBoth(homemade, standard);
 }

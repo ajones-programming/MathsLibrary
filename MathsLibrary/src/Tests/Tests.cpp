@@ -1,9 +1,9 @@
 #include "Tests.h"
 #include <iostream>
-#include <chrono>
 #include <concepts>
 #include <map>
 #include <string>
+
 
 template <typename T>
 T listAndGetValues(std::map<T, std::string> list, std::string testName = "");
@@ -208,21 +208,10 @@ void Tests::RandomnessTests()
 	}
 }
 
-void Tests::StartTimer()
-{
-	_start = std::chrono::high_resolution_clock::now();
-}
 
-void Tests::StopTimer() {
-	_stop = std::chrono::high_resolution_clock::now();
-}
-
-int Tests::nanosecondsDifference() {
-	return std::chrono::duration_cast<std::chrono::nanoseconds>(_start - _stop).count();
-}
 
 template <typename T>
-T listAndGetValues(std::map<T, std::string> list, std::string testName = "") {
+T listAndGetValues(std::map<T, std::string> list, std::string testName) {
 	std::cout << "ALL " << testName << " TESTS:" << std::endl;
 	for (auto pair : list) {
 		std::cout << " - " << pair.second << ": " << (int)pair.first << std::endl;

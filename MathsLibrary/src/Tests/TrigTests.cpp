@@ -10,9 +10,10 @@ void Tests::Acos()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::acos(input);
-	std::cout << "Output from function: " << MathsLibrary::Acos(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Acos(input, true); };
+	auto standard = [input]() { return std::acos(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Asin	Returns the arc - sine of f - the angle in radians whose sine is f.
@@ -23,9 +24,10 @@ void Tests::Asin()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::asin(input);
-	std::cout << "Output from function: " << MathsLibrary::Asin(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Asin(input, true); };
+	auto standard = [input]() { return std::asin(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Atan	Returns the arc - tangent of f - the angle in radians whose tangent is f.
@@ -36,9 +38,10 @@ void Tests::Atan()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::atan(input);
-	std::cout << "Output from function: " << MathsLibrary::Atan(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Atan(input, true); };
+	auto standard = [input]() { return std::atan(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Atan2	Returns the angle in radians whose Tan is y / x.
@@ -52,9 +55,10 @@ void Tests::Atan2()
 	std::cout << "Y Value to Convert: ";
 	float y;
 	std::cin >> y;
-	float manuallyCalculated = std::atan2(y,x);
-	std::cout << "Output from function: " << MathsLibrary::Atan2(x,y, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [x,y]() { return MathsLibrary::Atan2(x, y, true); };
+	auto standard = [x,y]() { return std::atan2(y, x); };
+	runBoth(homemade, standard);
 }
 
 ////	Cos	Returns the cosine of angle f.
@@ -65,9 +69,10 @@ void Tests::Cos()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::cos(input);
-	std::cout << "Output from function: " << MathsLibrary::Cos(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Cos(input, true); };
+	auto standard = [input]() { return std::cos(input); };
+	runBoth(homemade, standard);
 }
 
 ////	DeltaAngle	Calculates the shortest difference between two given angles given in degrees.
@@ -92,9 +97,9 @@ void Tests::Sin()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::sin(input);
-	std::cout << "Output from function: " << MathsLibrary::Sin(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+	auto homemade = [input]() { return MathsLibrary::Sin(input, true); };
+	auto standard = [input]() { return std::sin(input); };
+	runBoth(homemade, standard);
 }
 
 ////	Tan	Returns the tangent of angle f in radians.
@@ -105,8 +110,8 @@ void Tests::Tan()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::tan(input);
-	std::cout << "Output from function: " << MathsLibrary::Tan(input, true) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+	auto homemade = [input]() { return MathsLibrary::Tan(input, true); };
+	auto standard = [input]() { return std::tan(input); };
+	runBoth(homemade, standard);
 }
 

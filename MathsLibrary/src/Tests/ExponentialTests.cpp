@@ -3,15 +3,18 @@
 #include<iostream>
 #include <math.h>
 
+
 void Tests::Exp()
 {
 	std::cout << "Exponential. Comparing homemade function to existing function" << std::endl;
 	std::cout << "Input Value to Convert: ";
 	float input;
+
 	std::cin >> input;
-	float manuallyCalculated = std::exp(input);
-	std::cout << "Output from function: " << MathsLibrary::Exp(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Exp(input); };
+	auto standard = [input]() { return std::exp(input); };
+	runBoth(homemade, standard);
 }
 
 void Tests::Log()
@@ -20,9 +23,10 @@ void Tests::Log()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::log(input);
-	std::cout << "Output from function: " << MathsLibrary::Log(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Log(input); };
+	auto standard = [input]() { return std::log(input); };
+	runBoth(homemade, standard);
 
 }
 
@@ -32,7 +36,8 @@ void Tests::Log10()
 	std::cout << "Input Value to Convert: ";
 	float input;
 	std::cin >> input;
-	float manuallyCalculated = std::log10(input);
-	std::cout << "Output from function: " << MathsLibrary::Log10(input) << std::endl;
-	std::cout << "Output from manual calculated: " << manuallyCalculated << std::endl;
+
+	auto homemade = [input]() { return MathsLibrary::Log10(input); };
+	auto standard = [input]() { return std::log10(input); };
+	runBoth(homemade, standard);
 }
