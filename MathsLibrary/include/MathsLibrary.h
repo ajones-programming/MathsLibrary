@@ -15,13 +15,13 @@ public:
 	MATHSLIBRARY_API static float Deg2Rad(const float value);
 
 	//	Infinity	A representation of positive infinity(Read Only).
-	MATHSLIBRARY_API static const float Infinity;
+	MATHSLIBRARY_API static inline constexpr float Infinity{ std::numeric_limits<double>::infinity() };
 
 	//	NegativeInfinity	A representation of negative infinity(Read Only).
-	MATHSLIBRARY_API static const float NegativeInfinity;
+	MATHSLIBRARY_API static inline constexpr float NegativeInfinity{ -std::numeric_limits<double>::infinity() };
 
 	//	PI	The well - known 3.14159265358979... value(Read Only).
-	MATHSLIBRARY_API static const float PI;
+	MATHSLIBRARY_API static inline constexpr float PI{ 3.141592f };
 
 	//	Rad2Deg	Radians - to - degrees conversion constant(Read Only).
 	MATHSLIBRARY_API static float Rad2Deg(const float value);
