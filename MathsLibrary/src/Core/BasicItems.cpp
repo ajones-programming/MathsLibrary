@@ -190,5 +190,4 @@ constexpr float Q_rsqrt(float number) noexcept
 float MathsLibrary::Sqrt(const float value)
 {
 	return 1.f / Q_rsqrt(value);
-	//return Pow(value,0.5f);
 }

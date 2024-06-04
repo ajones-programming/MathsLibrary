@@ -1,11 +1,5 @@
 #include "MathsLibrary.h"
 
-//float MathsLibrary::CorrolatedColourTemperatureToRPG(float)
-//{
-//	return 0.0f;
-//}
-
-
 //these two functions may be wrong, as I have not used these before
 float MathsLibrary::GammaToLinearSpace(float value)
 {

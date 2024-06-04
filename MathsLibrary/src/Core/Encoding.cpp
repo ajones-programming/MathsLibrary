@@ -1,19 +1,6 @@
 #include "MathsLibrary.h"
 #include <bitset>
-//#include <iostream>
 #include <cstddef>
-
-void printArrayOfBinary(const char* pointer, int size) {
-	//for (int Count = 0; Count < size * 8; Count++)
-	//{
-	//	int b = *(pointer + (Count/8)) >> (Count - (Count/8)*8);
-	//	if (b & 1)
-	//		std::cout << "1";
-	//	else
-	//		std::cout << "0";
-	//}
-	//std::cout << std::endl;
-}
 
 //for two byte encoding of float
 unsigned short MathsLibrary::FloatToHalf(float value)
